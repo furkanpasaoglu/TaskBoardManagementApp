@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using TaskBoardManagementApp.Domain.Constants;
 using TaskBoardManagementApp.Domain.Entities;
 
 namespace TaskBoardManagementApp.Infrastructure.Persistence.Configurations;
@@ -26,9 +27,10 @@ public class IssueConfiguration : IEntityTypeConfiguration<Issue>
         builder.Property(x => x.Number)
            .HasColumnName("Number")
            .IsRequired();
-        
-        builder.Property(x => x.Name)
-           .HasColumnName("Name")
+
+        builder.Property(x => x.Title)
+           .HasColumnName("Title")
+           .HasMaxLength(IssueConsts.MaxTitleLength)
            .IsRequired();
         
         builder.Property(x => x.Types)
