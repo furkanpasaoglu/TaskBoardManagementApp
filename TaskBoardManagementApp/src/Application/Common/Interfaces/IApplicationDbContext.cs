@@ -4,9 +4,9 @@ using TaskBoardManagementApp.Domain.Entities;
 namespace TaskBoardManagementApp.Application.Common.Interfaces;
 public interface IApplicationDbContext
 {
-    DbSet<TodoList> TodoLists { get; }
-
-    DbSet<TodoItem> TodoItems { get; }
+    DbSet<Issue> Issues{ get; }
+    DbSet<IssueDetail> IssueDetails { get; }
+    DbSet<WorkLog> WorkLogs { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
