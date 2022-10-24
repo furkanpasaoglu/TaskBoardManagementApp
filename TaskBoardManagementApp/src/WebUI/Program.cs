@@ -7,6 +7,9 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebUIServices();
 
+//builder.Services.AddOpenApiDocument(document => document.DocumentName = "a");
+//builder.Services.AddOpenApiDocument(document => document.DocumentName = "b");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,10 +42,13 @@ app.UseSwaggerUi3(settings =>
     settings.DocumentPath = "/api/specification.json";
 });
 
+//app.UseSwagger();
+//app.UseSwaggerUi3();
+
 app.UseRouting();
 
 app.UseAuthentication();
-app.UseIdentityServer();
+//app.UseIdentityServer();
 app.UseAuthorization();
 
 app.MapControllerRoute(
