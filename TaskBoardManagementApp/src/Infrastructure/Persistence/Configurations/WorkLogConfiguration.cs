@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using TaskBoardManagementApp.Domain.Constants;
 using TaskBoardManagementApp.Domain.Entities;
 
 namespace TaskBoardManagementApp.Infrastructure.Persistence.Configurations;
@@ -18,6 +19,7 @@ public class WorkLogConfiguration : IEntityTypeConfiguration<WorkLog>
         
         builder.Property(x => x.Log)
             .HasColumnName("Log")
+            .HasMaxLength(WorkLogConsts.MaxLogLength)
             .IsRequired();
     }
 }
