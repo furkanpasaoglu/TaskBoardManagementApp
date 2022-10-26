@@ -41,6 +41,8 @@ public class CreateIssueCommandHandler : IRequestHandler<CreateIssueCommand, Cre
 
     public async Task<CreatedIssueDto> Handle(CreateIssueCommand request, CancellationToken cancellationToken)
     {
+        await _issueBusinessRules.IssueNumberCannotBeDuplicated(request.Number);
+
         var issue = new Issue(request.ProjectId, request.AssigneeId, request.ReporterId, request.Number, request.Title, request.Types, request.Status, request.DueDate);
 
         issue.AddDomainEvent(new IssueCreatedEvent(issue));

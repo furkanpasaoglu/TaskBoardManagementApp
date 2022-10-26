@@ -7,6 +7,7 @@ using AutoMapper;
 using MediatR;
 using TaskBoardManagementApp.Application.Common.Interfaces;
 using TaskBoardManagementApp.Application.Issues.Dtos;
+using TaskBoardManagementApp.Application.Issues.Rules;
 using TaskBoardManagementApp.Domain.Entities;
 using TaskBoardManagementApp.Domain.Enums;
 
@@ -29,23 +30,25 @@ public class UpdateIssueCommandHandler : IRequestHandler<UpdateIssueCommand, Upd
 {
     private readonly IApplicationDbContext _dbContext;
     private readonly IMapper _mapper;
+    private readonly IssueBusinessRules _businessRules;
 
-    public UpdateIssueCommandHandler(IApplicationDbContext dbContext, IMapper mapper)
+    public UpdateIssueCommandHandler(IApplicationDbContext dbContext, IMapper mapper, IssueBusinessRules businessRules)
     {
         _dbContext = dbContext;
         _mapper = mapper;
+        _businessRules = businessRules;
     }
 
     public async Task<UpdatedIssueDto> Handle(UpdateIssueCommand request, CancellationToken cancellationToken)
     {
+        await _businessRules.IssueShouldBeExist(request.Id);
+        await _businessRules.IssueNumberCannotBeDuplicated(request.Number);
+        await _businessRules.IssueTitleAlreadyUpdated(request.Id, request.Title);
+
         var issue = await _dbContext.Issues
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
-        // TODO: Business rules will be created..
-
         var mapped = _mapper.Map(request, issue);
-
-        // TODO: Will be refactored..
 
         var updatedIssue = _dbContext.Issues.Update(mapped);
         await _dbContext.SaveChangesAsync(cancellationToken);

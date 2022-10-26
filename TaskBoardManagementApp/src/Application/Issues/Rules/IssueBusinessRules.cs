@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using TaskBoardManagementApp.Application.Common.Exceptions;
 using TaskBoardManagementApp.Application.Common.Interfaces;
+using TaskBoardManagementApp.Application.Issues.Constants;
 
 namespace TaskBoardManagementApp.Application.Issues.Rules;
 
@@ -16,5 +19,26 @@ public class IssueBusinessRules
         _dbContext = dbContext;
     }
 
-    // TODO: Business rules will be created..
+    public async Task IssueNumberCannotBeDuplicated(int number)
+    {
+        var result = await _dbContext.Issues.FirstOrDefaultAsync(x => x.Number == number);
+        if (result is not null)
+            throw new BusinessException(IssueMessages.IssueNumberCannotBeDuplicated);
+    }
+
+    public async Task IssueTitleAlreadyUpdated(Guid id, string title)
+    {
+        var result = await _dbContext.Issues.FirstAsync(x => x.Id == id);
+
+        if (result.Title == title)
+            throw new BusinessException(IssueMessages.IssueTitleAlreadyUpdated);
+    }
+
+    public async Task IssueShouldBeExist(Guid id)
+    {
+        var result = await _dbContext.Issues.FirstOrDefaultAsync(x => x.Id == id);
+
+        if (result is null)
+            throw new BusinessException(IssueMessages.IssueIsNotFound);
+    }
 }

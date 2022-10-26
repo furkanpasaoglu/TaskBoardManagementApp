@@ -10,6 +10,6 @@ public class UpdateIssueCommandValidator : AbstractValidator<UpdateIssueCommand>
         RuleFor(x => x.Title)
             .MinimumLength(12)
             .NotEmpty()
-            .WithMessage($"{IssueMessages.MinTitleLengthMessage} and {IssueMessages.TitleCannotBeEmpty}");
+            .WithMessage($"{IssueMessages.MinTitleLengthMessage} or {IssueMessages.TitleCannotBeEmpty}");
     }
 }
