@@ -1,3 +1,4 @@
+using TaskBoardManagementApp.Application;
 using TaskBoardManagementApp.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);

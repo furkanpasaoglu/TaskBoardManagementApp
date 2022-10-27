@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using TaskBoardManagementApp.Application.Common.Interfaces;
@@ -33,7 +28,7 @@ public class GetByIdIssueQueryHandler : IRequestHandler<GetByIdIssueQuery, Issue
     {
         await _businessRules.IssueShouldBeExist(request.Id);
 
-        var result = await _dbContext.Issues.FirstOrDefaultAsync(x => x.Id == request.Id);
+        var result = await _dbContext.Issues.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
         return _mapper.Map<IssueGetByIdDto>(result);
     }
 }

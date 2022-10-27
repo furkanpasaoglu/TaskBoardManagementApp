@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using TaskBoardManagementApp.Application.Common.Interfaces;
 using TaskBoardManagementApp.Application.Issues.Dtos;
@@ -47,7 +42,7 @@ public class CreateIssueCommandHandler : IRequestHandler<CreateIssueCommand, Cre
 
         issue.AddDomainEvent(new IssueCreatedEvent(issue));
 
-        var createdIssue = await _context.Issues.AddAsync(issue);
+        var createdIssue = await _context.Issues.AddAsync(issue, cancellationToken);
 
         await _context.SaveChangesAsync(cancellationToken);
 
