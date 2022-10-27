@@ -6,10 +6,182 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/api/IssueDetails": {
+      "get": {
+        "tags": [
+          "Issue Detail"
+        ],
+        "operationId": "IssueDetails_GetList",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Issue Detail"
+        ],
+        "operationId": "IssueDetails_Add",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateIssueDetailCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Issue Detail"
+        ],
+        "operationId": "IssueDetails_Update",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateIssueDetailCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Issue Detail"
+        ],
+        "operationId": "IssueDetails_Delete",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteIssueDetailCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/IssueDetails/{id}": {
+      "get": {
+        "tags": [
+          "Issue Detail"
+        ],
+        "operationId": "IssueDetails_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/api/Issues": {
       "get": {
         "tags": [
-          "Issues"
+          "Issue"
         ],
         "operationId": "Issues_GetList",
         "responses": {
@@ -24,11 +196,16 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "post": {
         "tags": [
-          "Issues"
+          "Issue"
         ],
         "operationId": "Issues_Add",
         "requestBody": {
@@ -55,11 +232,16 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "put": {
         "tags": [
-          "Issues"
+          "Issue"
         ],
         "operationId": "Issues_Update",
         "requestBody": {
@@ -86,11 +268,16 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "delete": {
         "tags": [
-          "Issues"
+          "Issue"
         ],
         "operationId": "Issues_Delete",
         "requestBody": {
@@ -117,13 +304,18 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/Issues/{id}": {
       "get": {
         "tags": [
-          "Issues"
+          "Issue"
         ],
         "operationId": "Issues_GetById",
         "parameters": [
@@ -150,12 +342,63 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     }
   },
   "components": {
     "schemas": {
+      "CreateIssueDetailCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "issueId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "description": {
+            "type": "string"
+          },
+          "comments": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateIssueDetailCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "issueId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "description": {
+            "type": "string"
+          },
+          "comments": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteIssueDetailCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
       "CreateIssueCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -285,6 +528,14 @@
   "security": [
     {
       "JWT": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Issue Detail"
+    },
+    {
+      "name": "Issue"
     }
   ]
 }

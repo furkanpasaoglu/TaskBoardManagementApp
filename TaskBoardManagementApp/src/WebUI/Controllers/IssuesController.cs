@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 using TaskBoardManagementApp.Application.Issues.Commands.CreateIssue;
 using TaskBoardManagementApp.Application.Issues.Commands.DeleteIssue;
 using TaskBoardManagementApp.Application.Issues.Commands.UpdateIssue;
@@ -7,8 +9,10 @@ using TaskBoardManagementApp.Application.Issues.Queries.GetListIssues;
 
 namespace TaskBoardManagementApp.WebUI.Controllers;
 
+[OpenApiTags("Issue")]
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class IssuesController : ApiControllerBase
 {
     [HttpGet]

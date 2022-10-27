@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskBoardManagementApp.Domain.Enums;
+﻿using TaskBoardManagementApp.Domain.Enums;
 
 namespace TaskBoardManagementApp.Application.Issues.Dtos;
 public record IssueGetByIdDto

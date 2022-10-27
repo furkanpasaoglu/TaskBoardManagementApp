@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using TaskBoardManagementApp.Application.Common.Interfaces;
 using TaskBoardManagementApp.Application.Issues.Dtos;
 using TaskBoardManagementApp.Application.Issues.Rules;
-using TaskBoardManagementApp.Domain.Entities;
 using TaskBoardManagementApp.Domain.Enums;
 
 namespace TaskBoardManagementApp.Application.Issues.Commands.UpdateIssue;
