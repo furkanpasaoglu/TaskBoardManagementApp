@@ -3,6 +3,7 @@
 namespace TaskBoardManagementApp.Application.Issues.Dtos;
 public record IssueGetByIdDto
 {
+    public Guid Id { get; set; }
     public Guid ProjectId { get; set; }
     public Guid AssigneeId { get; set; }
     public Guid ReporterId { get; set; }

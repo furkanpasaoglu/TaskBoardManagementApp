@@ -6,10 +6,182 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/api/Comments": {
+      "get": {
+        "tags": [
+          "Comments"
+        ],
+        "operationId": "Comments_GetList",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Comments"
+        ],
+        "operationId": "Comments_Add",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCommentCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Comments"
+        ],
+        "operationId": "Comments_Update",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCommentCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Comments"
+        ],
+        "operationId": "Comments_Delete",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteCommentCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/Comments/{id}": {
+      "get": {
+        "tags": [
+          "Comments"
+        ],
+        "operationId": "Comments_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/api/IssueDetails": {
       "get": {
         "tags": [
-          "Issue Detail"
+          "Issue Details"
         ],
         "operationId": "IssueDetails_GetList",
         "responses": {
@@ -33,7 +205,7 @@
       },
       "post": {
         "tags": [
-          "Issue Detail"
+          "Issue Details"
         ],
         "operationId": "IssueDetails_Add",
         "requestBody": {
@@ -69,7 +241,7 @@
       },
       "put": {
         "tags": [
-          "Issue Detail"
+          "Issue Details"
         ],
         "operationId": "IssueDetails_Update",
         "requestBody": {
@@ -105,7 +277,7 @@
       },
       "delete": {
         "tags": [
-          "Issue Detail"
+          "Issue Details"
         ],
         "operationId": "IssueDetails_Delete",
         "requestBody": {
@@ -143,7 +315,7 @@
     "/api/IssueDetails/{id}": {
       "get": {
         "tags": [
-          "Issue Detail"
+          "Issue Details"
         ],
         "operationId": "IssueDetails_GetById",
         "parameters": [
@@ -181,7 +353,7 @@
     "/api/Issues": {
       "get": {
         "tags": [
-          "Issue"
+          "Issues"
         ],
         "operationId": "Issues_GetList",
         "responses": {
@@ -205,7 +377,7 @@
       },
       "post": {
         "tags": [
-          "Issue"
+          "Issues"
         ],
         "operationId": "Issues_Add",
         "requestBody": {
@@ -241,7 +413,7 @@
       },
       "put": {
         "tags": [
-          "Issue"
+          "Issues"
         ],
         "operationId": "Issues_Update",
         "requestBody": {
@@ -277,7 +449,7 @@
       },
       "delete": {
         "tags": [
-          "Issue"
+          "Issues"
         ],
         "operationId": "Issues_Delete",
         "requestBody": {
@@ -315,7 +487,7 @@
     "/api/Issues/{id}": {
       "get": {
         "tags": [
-          "Issue"
+          "Issues"
         ],
         "operationId": "Issues_GetById",
         "parameters": [
@@ -353,6 +525,62 @@
   },
   "components": {
     "schemas": {
+      "CreateCommentCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "issueId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "userId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateCommentCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "issueId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "userId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteCommentCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
       "CreateIssueDetailCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -532,10 +760,13 @@
   ],
   "tags": [
     {
-      "name": "Issue Detail"
+      "name": "Comments"
     },
     {
-      "name": "Issue"
+      "name": "Issue Details"
+    },
+    {
+      "name": "Issues"
     }
   ]
 }
