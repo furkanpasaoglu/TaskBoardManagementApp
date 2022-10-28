@@ -2,6 +2,7 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using TaskBoardManagementApp.Application.Comments.Rules;
 using TaskBoardManagementApp.Application.Common.Behaviours;
 using TaskBoardManagementApp.Application.IssueDetails.Rules;
 using TaskBoardManagementApp.Application.Issues.Rules;
@@ -17,6 +18,7 @@ public static class ConfigureServices
         
         services.AddScoped<IssueBusinessRules>();
         services.AddScoped<IssueDetailBusinessRules>();
+        services.AddScoped<CommentBusinessRules>();
         
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));

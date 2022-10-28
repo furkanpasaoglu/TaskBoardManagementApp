@@ -9,7 +9,7 @@ using TaskBoardManagementApp.Application.Issues.Queries.GetListIssues;
 
 namespace TaskBoardManagementApp.WebUI.Controllers;
 
-[OpenApiTags("Issue")]
+[OpenApiTags("Issues")]
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]

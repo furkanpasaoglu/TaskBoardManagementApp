@@ -5,7 +5,7 @@ namespace TaskBoardManagementApp.Domain.Entities;
 /// <summary>
 /// Task Entity.
 /// </summary>
-public class Issue : BaseAuditableEntity
+public class Issue : BaseFullAuditableEntity
 {
     public Guid ProjectId { get; private set; }
     public Guid AssigneeId { get; private set; }
