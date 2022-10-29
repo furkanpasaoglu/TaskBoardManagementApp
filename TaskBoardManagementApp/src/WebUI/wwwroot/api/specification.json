@@ -521,6 +521,153 @@
           }
         ]
       }
+    },
+    "/api/WorkLogs": {
+      "get": {
+        "tags": [
+          "Work Logs"
+        ],
+        "operationId": "WorkLogs_GetList",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Work Logs"
+        ],
+        "operationId": "WorkLogs_Add",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkLogCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Work Logs"
+        ],
+        "operationId": "WorkLogs_Update",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkLogCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Work Logs"
+        ],
+        "operationId": "WorkLogs_Delete",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteWorkLogCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WorkLogs/{id}": {
+      "get": {
+        "tags": [
+          "Work Logs"
+        ],
+        "operationId": "WorkLogs_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -591,9 +738,6 @@
           },
           "description": {
             "type": "string"
-          },
-          "comments": {
-            "type": "string"
           }
         }
       },
@@ -610,9 +754,6 @@
             "format": "guid"
           },
           "description": {
-            "type": "string"
-          },
-          "comments": {
             "type": "string"
           }
         }
@@ -742,6 +883,46 @@
             "format": "guid"
           }
         }
+      },
+      "CreateWorkLogCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "issueId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "log": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateWorkLogCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "issueId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "log": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteWorkLogCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
       }
     },
     "securitySchemes": {
@@ -767,6 +948,9 @@
     },
     {
       "name": "Issues"
+    },
+    {
+      "name": "Work Logs"
     }
   ]
 }

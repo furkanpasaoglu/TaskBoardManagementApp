@@ -11,7 +11,6 @@ public record UpdateIssueDetailCommand : IRequest<UpdatedIssueDetailDto>
     public Guid Id { get; init; }
     public Guid IssueId { get;  init; }
     public string Description { get;  init; }
-    public string Comments { get; init; }
 }
 
 public class UpdateIssueDetailCommandHandler : IRequestHandler<UpdateIssueDetailCommand, UpdatedIssueDetailDto>

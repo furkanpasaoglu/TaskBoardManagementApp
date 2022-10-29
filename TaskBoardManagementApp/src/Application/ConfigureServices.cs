@@ -6,6 +6,7 @@ using TaskBoardManagementApp.Application.Common.Behaviours;
 using TaskBoardManagementApp.Application.Features.Comments.Rules;
 using TaskBoardManagementApp.Application.Features.IssueDetails.Rules;
 using TaskBoardManagementApp.Application.Features.Issues.Rules;
+using TaskBoardManagementApp.Application.Features.WorkLogs.Rules;
 
 namespace TaskBoardManagementApp.Application;
 public static class ConfigureServices
@@ -19,6 +20,7 @@ public static class ConfigureServices
         services.AddScoped<IssueBusinessRules>();
         services.AddScoped<IssueDetailBusinessRules>();
         services.AddScoped<CommentBusinessRules>();
+        services.AddScoped<WorkLogBusinessRules>();
         
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
