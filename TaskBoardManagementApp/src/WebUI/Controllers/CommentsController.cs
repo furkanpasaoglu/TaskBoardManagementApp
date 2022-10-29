@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
-using TaskBoardManagementApp.Application.Comments.Commands.CreateComment;
-using TaskBoardManagementApp.Application.Comments.Commands.DeleteComment;
-using TaskBoardManagementApp.Application.Comments.Commands.UpdateComment;
-using TaskBoardManagementApp.Application.Comments.Queries.GetByIdComment;
-using TaskBoardManagementApp.Application.Comments.Queries.GetListComments;
+using TaskBoardManagementApp.Application.Features.Comments.Commands.CreateComment;
+using TaskBoardManagementApp.Application.Features.Comments.Commands.DeleteComment;
+using TaskBoardManagementApp.Application.Features.Comments.Commands.UpdateComment;
+using TaskBoardManagementApp.Application.Features.Comments.Queries.GetByIdComment;
+using TaskBoardManagementApp.Application.Features.Comments.Queries.GetListComments;
 
 namespace TaskBoardManagementApp.WebUI.Controllers;
 

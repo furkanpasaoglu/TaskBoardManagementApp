@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
-using TaskBoardManagementApp.Application.Issues.Commands.CreateIssue;
-using TaskBoardManagementApp.Application.Issues.Commands.DeleteIssue;
-using TaskBoardManagementApp.Application.Issues.Commands.UpdateIssue;
-using TaskBoardManagementApp.Application.Issues.Queries.GetByIdIssue;
-using TaskBoardManagementApp.Application.Issues.Queries.GetListIssues;
+using TaskBoardManagementApp.Application.Features.Issues.Commands.CreateIssue;
+using TaskBoardManagementApp.Application.Features.Issues.Commands.DeleteIssue;
+using TaskBoardManagementApp.Application.Features.Issues.Commands.UpdateIssue;
+using TaskBoardManagementApp.Application.Features.Issues.Queries.GetByIdIssue;
+using TaskBoardManagementApp.Application.Features.Issues.Queries.GetListIssues;
 
 namespace TaskBoardManagementApp.WebUI.Controllers;
 

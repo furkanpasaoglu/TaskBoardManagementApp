@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="IssueDetails\EventHandlers" />
+      <Folder Include="Features" />
     </ItemGroup>
 
 </Project>
