@@ -2,10 +2,10 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using TaskBoardManagementApp.Application.Comments.Rules;
 using TaskBoardManagementApp.Application.Common.Behaviours;
-using TaskBoardManagementApp.Application.IssueDetails.Rules;
-using TaskBoardManagementApp.Application.Issues.Rules;
+using TaskBoardManagementApp.Application.Features.Comments.Rules;
+using TaskBoardManagementApp.Application.Features.IssueDetails.Rules;
+using TaskBoardManagementApp.Application.Features.Issues.Rules;
 
 namespace TaskBoardManagementApp.Application;
 public static class ConfigureServices
