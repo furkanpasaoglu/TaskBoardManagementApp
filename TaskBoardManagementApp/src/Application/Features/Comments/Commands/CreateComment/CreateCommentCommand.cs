@@ -34,7 +34,8 @@ public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand,
         var comment = new Comment(request.ProjectId, request.IssueId, request.UserId, request.Message);
 
         var createdComment = await _dbContext.Comments.AddAsync(comment, cancellationToken);
-
-        return _mapper.Map<CreatedCommentDto>(createdComment);
+        await _dbContext.SaveChangesAsync(cancellationToken);
+        
+        return _mapper.Map<CreatedCommentDto>(createdComment.Entity);
     }
 }

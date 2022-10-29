@@ -11,7 +11,6 @@ public record CreateIssueDetailCommand : IRequest<CreatedIssueDetailDto>
 {
     public Guid IssueId { get; init; }
     public string Description { get; init; }
-    public string Comments { get; init; }
 }
 
 public class CreateIssueDetailCommandHandler : IRequestHandler<CreateIssueDetailCommand, CreatedIssueDetailDto>
@@ -33,7 +32,7 @@ public class CreateIssueDetailCommandHandler : IRequestHandler<CreateIssueDetail
     {
         await _businessRules.IssueShouldBeExist(request.IssueId);
 
-        var issueDetail = _mapper.Map<IssueDetail>(request);
+        var issueDetail = new IssueDetail(request.IssueId, request.Description);
         var createdIssueDetail = await _context.IssueDetails.AddAsync(issueDetail, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
         return _mapper.Map<CreatedIssueDetailDto>(createdIssueDetail.Entity);

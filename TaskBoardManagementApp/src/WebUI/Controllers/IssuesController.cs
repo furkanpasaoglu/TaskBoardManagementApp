@@ -5,7 +5,7 @@ using TaskBoardManagementApp.Application.Features.Issues.Commands.CreateIssue;
 using TaskBoardManagementApp.Application.Features.Issues.Commands.DeleteIssue;
 using TaskBoardManagementApp.Application.Features.Issues.Commands.UpdateIssue;
 using TaskBoardManagementApp.Application.Features.Issues.Queries.GetByIdIssue;
-using TaskBoardManagementApp.Application.Features.Issues.Queries.GetListIssues;
+using TaskBoardManagementApp.Application.Features.Issues.Queries.GetListIssue;
 
 namespace TaskBoardManagementApp.WebUI.Controllers;
 
