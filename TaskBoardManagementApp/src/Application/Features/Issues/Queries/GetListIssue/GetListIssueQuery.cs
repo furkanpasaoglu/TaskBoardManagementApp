@@ -1,12 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using TaskBoardManagementApp.Application.Common.Behaviours.Caching;
 using TaskBoardManagementApp.Application.Common.Interfaces;
 using TaskBoardManagementApp.Application.Features.Issues.Dtos;
 
 namespace TaskBoardManagementApp.Application.Features.Issues.Queries.GetListIssue;
-public record GetListIssueQuery : IRequest<List<IssueListDto>>
+public record GetListIssueQuery : IRequest<List<IssueListDto>>, ICachableRequest
 {
+    public bool BypassCache => false;
+    public string CacheKey => "IssueListKey";
+    public TimeSpan? SlidingExpiration => TimeSpan.FromMinutes(2);
 }
 
 public class GetListIssueQueryHandler : IRequestHandler<GetListIssueQuery, List<IssueListDto>>

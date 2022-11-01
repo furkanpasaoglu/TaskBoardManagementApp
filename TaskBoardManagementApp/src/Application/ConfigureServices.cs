@@ -3,6 +3,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using TaskBoardManagementApp.Application.Common.Behaviours;
+using TaskBoardManagementApp.Application.Common.Behaviours.Caching;
 using TaskBoardManagementApp.Application.Features.Comments.Rules;
 using TaskBoardManagementApp.Application.Features.IssueDetails.Rules;
 using TaskBoardManagementApp.Application.Features.Issues.Rules;
@@ -26,6 +27,8 @@ public static class ConfigureServices
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
 
         return services;
     }

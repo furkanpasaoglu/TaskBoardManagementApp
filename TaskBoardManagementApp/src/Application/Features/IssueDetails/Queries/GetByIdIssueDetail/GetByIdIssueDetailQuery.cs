@@ -1,15 +1,22 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using TaskBoardManagementApp.Application.Common.Behaviours.Caching;
 using TaskBoardManagementApp.Application.Common.Interfaces;
 using TaskBoardManagementApp.Application.Features.IssueDetails.Dtos;
 using TaskBoardManagementApp.Application.Features.IssueDetails.Rules;
 
 namespace TaskBoardManagementApp.Application.Features.IssueDetails.Queries.GetByIdIssueDetail;
 
-public record GetByIdIssueDetailQuery : IRequest<IssueDetailGetByIdDto>
+public record GetByIdIssueDetailQuery : IRequest<IssueDetailGetByIdDto>, ICachableRequest
 {
     public Guid Id { get; init; }
+
+    public bool BypassCache => false;
+
+    public string CacheKey => "GetByIdIssueDetailKey";
+
+    public TimeSpan? SlidingExpiration => TimeSpan.FromMinutes(2);
 }
 
 public class GetByIdIssueDetailQueryHandler : IRequestHandler<GetByIdIssueDetailQuery, IssueDetailGetByIdDto>

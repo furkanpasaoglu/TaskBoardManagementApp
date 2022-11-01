@@ -1,14 +1,19 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using TaskBoardManagementApp.Application.Common.Behaviours.Caching;
 using TaskBoardManagementApp.Application.Common.Interfaces;
 using TaskBoardManagementApp.Application.Features.WorkLogs.Dtos;
 
 namespace TaskBoardManagementApp.Application.Features.WorkLogs.Queries.GetListWorkLog;
 
-public record GetListWorkLogQuery : IRequest<List<WorkLogListDto>>
+public record GetListWorkLogQuery : IRequest<List<WorkLogListDto>>, ICachableRequest
 {
-    
+    public bool BypassCache => false;
+
+    public string CacheKey => "GetListWorkLogKey";
+
+    public TimeSpan? SlidingExpiration => TimeSpan.FromMinutes(2);
 }
 
 public class GetListWorkLogQueryHandler : IRequestHandler<GetListWorkLogQuery, List<WorkLogListDto>>

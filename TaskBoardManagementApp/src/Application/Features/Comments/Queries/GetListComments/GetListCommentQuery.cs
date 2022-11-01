@@ -1,13 +1,18 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using TaskBoardManagementApp.Application.Common.Behaviours.Caching;
 using TaskBoardManagementApp.Application.Common.Interfaces;
 using TaskBoardManagementApp.Application.Features.Comments.Dtos;
 
 namespace TaskBoardManagementApp.Application.Features.Comments.Queries.GetListComments;
-public record GetListCommentQuery : IRequest<List<CommentListDto>>
+public record GetListCommentQuery : IRequest<List<CommentListDto>>, ICachableRequest
 {
+    public bool BypassCache => false;
 
+    public string CacheKey => "GetListCommentKey";
+
+    public TimeSpan? SlidingExpiration => TimeSpan.FromMinutes(2);
 }
 
 public class GetListCommentQueryHandler : IRequestHandler<GetListCommentQuery, List<CommentListDto>>
