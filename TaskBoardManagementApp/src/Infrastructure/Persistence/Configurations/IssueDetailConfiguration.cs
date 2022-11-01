@@ -21,10 +21,5 @@ public class IssueDetailConfiguration : IEntityTypeConfiguration<IssueDetail>
           .HasColumnName("Description")
           .HasMaxLength(IssueDetailConsts.MaxDescriptionLength)
           .IsRequired();
-
-        builder.Property(x => x.Comments)
-          .HasColumnName("Comments")
-          .HasMaxLength(IssueDetailConsts.MaxCommentLength)
-          .IsRequired();
     }
 }

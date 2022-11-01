@@ -1,3 +1,4 @@
+using TaskBoardManagementApp.Application;
 using TaskBoardManagementApp.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebUIServices();
+
+//builder.Services.AddOpenApiDocument(document => document.DocumentName = "a");
+//builder.Services.AddOpenApiDocument(document => document.DocumentName = "b");
 
 var app = builder.Build();
 
@@ -38,6 +42,9 @@ app.UseSwaggerUi3(settings =>
     settings.Path = "/api";
     settings.DocumentPath = "/api/specification.json";
 });
+
+//app.UseSwagger();
+//app.UseSwaggerUi3();
 
 app.UseRouting();
 

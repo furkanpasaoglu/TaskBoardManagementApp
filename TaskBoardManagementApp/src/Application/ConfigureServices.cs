@@ -1,9 +1,14 @@
 ﻿using System.Reflection;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using TaskBoardManagementApp.Application.Common.Behaviours;
+using TaskBoardManagementApp.Application.Features.Comments.Rules;
+using TaskBoardManagementApp.Application.Features.IssueDetails.Rules;
+using TaskBoardManagementApp.Application.Features.Issues.Rules;
+using TaskBoardManagementApp.Application.Features.WorkLogs.Rules;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace TaskBoardManagementApp.Application;
 public static class ConfigureServices
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
@@ -11,6 +16,12 @@ public static class ConfigureServices
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddMediatR(Assembly.GetExecutingAssembly());
+        
+        services.AddScoped<IssueBusinessRules>();
+        services.AddScoped<IssueDetailBusinessRules>();
+        services.AddScoped<CommentBusinessRules>();
+        services.AddScoped<WorkLogBusinessRules>();
+        
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));

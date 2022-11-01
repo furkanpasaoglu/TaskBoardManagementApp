@@ -1,0 +1,35 @@
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using TaskBoardManagementApp.Application.Common.Interfaces;
+using TaskBoardManagementApp.Application.Features.WorkLogs.Dtos;
+using TaskBoardManagementApp.Application.Features.WorkLogs.Rules;
+
+namespace TaskBoardManagementApp.Application.Features.WorkLogs.Queries.GetByIdWorkLog;
+
+public record GetByIdWorkLogQuery : IRequest<WorkLogGetByIdDto>
+{
+    public Guid Id { get; init; }
+}
+
+public class GetByIdWorkLogQueryHandler : IRequestHandler<GetByIdWorkLogQuery, WorkLogGetByIdDto>
+{
+    private readonly IApplicationDbContext _dbContext;
+    private readonly IMapper _mapper;
+    private readonly WorkLogBusinessRules _businessRules;
+
+    public GetByIdWorkLogQueryHandler(IApplicationDbContext dbContext, IMapper mapper, WorkLogBusinessRules businessRules)
+    {
+        _dbContext = dbContext;
+        _mapper = mapper;
+        _businessRules = businessRules;
+    }
+
+    public async Task<WorkLogGetByIdDto> Handle(GetByIdWorkLogQuery request, CancellationToken cancellationToken)
+    {
+        await _businessRules.WorkLogIdShouldBeExist(request.Id);
+        
+        var result = await _dbContext.WorkLogs.FirstOrDefaultAsync(x=>x.Id == request.Id, cancellationToken);
+        return _mapper.Map<WorkLogGetByIdDto>(result);
+    }
+}
