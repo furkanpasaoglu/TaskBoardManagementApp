@@ -8,6 +8,8 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebUIServices();
 
+
+builder.Services.AddStackExchangeRedisCache(opt => opt.Configuration = builder.Configuration["CacheSettings:Connection"]);
 //builder.Services.AddOpenApiDocument(document => document.DocumentName = "a");
 //builder.Services.AddOpenApiDocument(document => document.DocumentName = "b");
 
