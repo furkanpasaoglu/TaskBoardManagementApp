@@ -8,6 +8,7 @@ public interface IApplicationDbContext
     DbSet<IssueDetail> IssueDetails { get; }
     DbSet<WorkLog> WorkLogs { get; }
     DbSet<Comment> Comments { get; }
+    DbSet<Project> Projects { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

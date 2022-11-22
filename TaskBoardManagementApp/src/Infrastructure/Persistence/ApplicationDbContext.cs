@@ -30,6 +30,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
     public DbSet<IssueDetail> IssueDetails => Set<IssueDetail>();
     public DbSet<WorkLog> WorkLogs => Set<WorkLog>();
     public DbSet<Comment> Comments => Set<Comment>();
+    public DbSet<Project> Projects => Set<Project>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
